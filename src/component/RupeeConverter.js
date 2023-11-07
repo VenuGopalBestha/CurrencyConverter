@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const conversionState ={
     USD:{
         EUR: 0.89,
@@ -19,51 +20,76 @@ const conversionState ={
         USD:0.14,
     },
 }
-class RupeeConverter extends React.Component{
-    constructor(props){
-        super(props)
-        this.state ={initial:0,final:0,initialCurrency:"INR",finalCurrency:"USD"}
-        
-    }
-    currencyChange1=(event)=>{
-        this.setState({initialCurrency:event.target.value})
-    }
-    currencyChange2=(event)=>{
-        this.setState({finalCurrency:event.target.value})
-    }
-    numChange1=(event)=>{
-        const{initialCurrency,finalCurrency} = this.state
-        const price = conversionState[initialCurrency][finalCurrency]
-        this.setState({initial:event.target.value,
-                        final:event.target.value*price})
-    }
-    numChange2=(event)=>{
-        const{initialCurrency,finalCurrency} = this.state
-        const price = conversionState[initialCurrency][finalCurrency]
-        this.setState({initial:event.target.value/price,
-                        final:event.target.value})
-        
-    }
-    render(){
-        const {initialCurrency,finalCurrency,initial,final}  =this.state
-        return(
-            <div>
-                <select value={initialCurrency} onChange={this.currencyChange1}>
-                    <option value="INR">INR</option>
-                    <option value="USD">USD</option>
-                    <option value="YUVN">Chinese Yuvan</option>
-                </select>
-                <input type="text" value={initial} onChange={this.numChange1}/>
-                <br></br>
-                <br></br>
-                <select value={finalCurrency} onChange={(this.currencyChange2)}>
-                    <option value="USD">USD</option>
-                    <option value="INR">INR</option>
-                    <option value="YUVN">Chinese Yuvan</option>
-                </select>
-                <input type="text" value={final} onChange={(this.numChange2)} />
-            </div>
-        )
-    }
+class RupeeConverter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      initial: 0,
+      final: 0,
+      initialCurrency: 'INR',
+      finalCurrency: 'USD',
+    };
+  }
+
+  currencyChange1 = (event) => {
+    this.setState({ initialCurrency: event.target.value });
+  };
+
+  currencyChange2 = (event) => {
+    this.setState({ finalCurrency: event.target.value });
+  };
+
+  numChange1 = (event) => {
+    const { initialCurrency, finalCurrency } = this.state;
+    const price = conversionState[initialCurrency][finalCurrency];
+    this.setState({
+      initial: event.target.value,
+      final: event.target.value * price,
+    });
+  };
+
+  numChange2 = (event) => {
+    const { initialCurrency, finalCurrency } = this.state;
+    const price = conversionState[initialCurrency][finalCurrency];
+    this.setState({
+      initial: event.target.value / price,
+      final: event.target.value,
+    });
+  };
+
+  render() {
+    const { initialCurrency, finalCurrency, initial, final } = this.state;
+    return (
+      <div className="container" style={{ backgroundColor: 'grey', padding: '20px' }}>
+        <select className="form-select" value={initialCurrency} onChange={this.currencyChange1}>
+          <option value="INR">INR</option>
+          <option value="USD">USD</option>
+          <option value="YUVN">Chinese Yuvan</option>
+        </select>
+        <input
+          type="text"
+          value={initial}
+          onChange={this.numChange1}
+          className="form-control"
+          style={{ backgroundColor: 'lightyellow' }}
+        />
+        <br />
+        <br />
+        <select className="form-select" value={finalCurrency} onChange={this.currencyChange2}>
+          <option value="USD">USD</option>
+          <option value="INR">INR</option>
+          <option value="YUVN">Chinese Yuvan</option>
+        </select>
+        <input
+          type="text"
+          value={final}
+          onChange={this.numChange2}
+          className="form-control"
+          style={{ backgroundColor: 'lightblue' }}
+        />
+      </div>
+    );
+  }
 }
-export default RupeeConverter
+
+export default RupeeConverter;
